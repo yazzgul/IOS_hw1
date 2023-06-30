@@ -52,18 +52,18 @@ struct LibraryLocation: Equatable {
     }
 }
 //автор книги
-class Author: Equatable {
+public class Author: Equatable {
     let name : String
     init(name: String) {
         self.name = name
     }
-    static func == (lhs: Author, rhs: Author) -> Bool {
+    public static func == (lhs: Author, rhs: Author) -> Bool {
         return (lhs.name == rhs.name)
     }
     
 }
 //книга с ее данными
-class Book: Equatable, PrintInfo {
+public class Book: Equatable, PrintInfo {
     private let title: String
     let author: Author
     let publisher: Publisher
@@ -76,7 +76,7 @@ class Book: Equatable, PrintInfo {
         self.genre = genre
         self.type = type
     }
-    static func == (lhs: Book, rhs: Book) -> Bool {
+    public static func == (lhs: Book, rhs: Book) -> Bool {
         
         return ((lhs.title == rhs.title) && (lhs.author.name == rhs.author.name))
     }
@@ -90,7 +90,7 @@ class Book: Equatable, PrintInfo {
     
 }
 // аудиокнига (наследует от обычной книги, добавляется рассказчик)
-class AudioBook: Book {
+public class AudioBook: Book {
     private let narrator: String
     init(title: String, author: Author, publisher: Publisher, genre: Genre, type: TypeOfBook, narrator: String) {
         self.narrator = narrator
@@ -108,7 +108,7 @@ class AudioBook: Book {
 }
 
 //система библиотеки, то есть что разрешается делать, что хранится
-class LibrarySystem: ActInLibraries {
+open class LibrarySystem: ActInLibraries {
     //    массив всех книг в библио
     private var books = [Book] ()
     //    каталог автор -> все его книги
@@ -153,7 +153,7 @@ class LibrarySystem: ActInLibraries {
 }
 
 //менеджер(контроллер) расположений библиотек в городе
-class LibraryManagerOfLocation {
+open class LibraryManagerOfLocation {
     private var locations = [LibraryLocation] ()
     func addNewLocation (location: LibraryLocation) {
         locations.append(location)
@@ -190,4 +190,3 @@ let location = LibraryLocation(name: "The Library", location: "Square")
 var libraryManager = LibraryManagerOfLocation()
 libraryManager.addNewLocation(location: location)
 libraryManager.printAllLocations()
-
